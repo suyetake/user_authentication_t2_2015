@@ -75,26 +75,4 @@ feature 'User Authentication' do
     expect(page).to_not have_text("Welcome back #{user.first_name.titleize}")
     expect(page).to_not have_text("Signed in as #{user.email}")
   end
-
-  scenario 'fail when password too short' do
-    user = FactoryGirl.create(:user, password: '2short1')
-
-    visit login_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button('Login')
-
-    expect(page).to have_text("Password must be 8-72 characters long")
-
-  #   expect(page).to have_link('Logout')
-  #
-  #   click_link('Logout')
-  #
-  #   expect(page).to have_text("#{user.email} has been logged out")
-  #   expect(page).to_not have_text("Welcome back #{user.first_name.titleize}")
-  #   expect(page).to_not have_text("Signed in as #{user.email}")
-  end
-
 end
